@@ -980,7 +980,7 @@ export default function App(){
   return(
     <ThemeContext.Provider value={{isLight:isLightMode,setIsLight:setIsLightMode}}>
       <Router>
-        <div className={`flex h-screen text-white font-sans overflow-hidden transition-colors duration-300 ${isLightMode?'bg-slate-50':'bg-nl-dark'}`}>
+        <div className={`flex h-screen font-sans overflow-hidden transition-colors duration-300 ${isLightMode ? 'bg-slate-50 text-slate-900' : 'bg-nl-dark text-white'}`}>
           <Sidebar account={account} disconnectWallet={disconnectWallet}/>
           <div className="flex-1 flex flex-col overflow-y-auto relative scroll-smooth">
             <Header account={account} connectWallet={connectWallet} disconnectWallet={disconnectWallet}/>

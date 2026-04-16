@@ -11,6 +11,10 @@ body {
   background-color: var(--color-nl-dark);
   color: white;
 }
+.light body {
+  background-color: #f8fafc;
+  color: #0f172a;
+}
 /* Add this to your index.css */
 .glass-panel {
   background: rgba(30, 41, 59, 0.7);
