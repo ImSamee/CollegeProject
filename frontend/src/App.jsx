@@ -13,20 +13,22 @@ import {
 // 👇 IMPORT THE LOGIN PAGE
 import LoginPage from './LoginPage';
 
-// 🚨 ENVIRONMENT VARIABLES (Set these in frontend/.env)
-const CONTRACT_ADDRESS = import.meta.env.VITE_CONTRACT_ADDRESS || "0x1ecaF82622cBDb035f0CE78cB2E921303d631b35";
+// 🚨 EMERGENCY FIX: Hardcoded address for new PC
+const CONTRACT_ADDRESS = "0x7ba1605e51588cb1bb7d6cd66f55457e96611351";
 const RELAYER_URL = import.meta.env.VITE_RELAYER_URL || "http://localhost:8000";
+
 
 const CONTRACT_ABI = [
   "function hasAccess(bytes32 patientId, address doctor) view returns (bool)",
   "function getPatientNonce(bytes32 patientId) view returns (uint256)",
-  "function patients(bytes32) view returns (bytes32 patientId, address controllerAddress, uint40 registeredAt, bool active, uint32 recordCount, bool consentGiven, bytes32 consentHash)",
+  "function patients(bytes32) view returns (bytes32, address, uint40, bool, uint32, bool, bytes32)",
   "function doctors(address) view returns (bool)",
-  "function getPatientRecords(bytes32 patientId, uint256 offset, uint256 limit) view returns (uint256[] memory page, uint256 total)",
-  "function getRecord(uint256 recordId) view returns (bytes32 patientId, uint256 timestamp, bytes32 merkleRoot, bytes32 classification, uint16 confidenceBps, bool anomalyFlagged, address submittingDoctor)",
-  "function accessGrants(uint256) view returns (bytes32 patientId, address doctorAddress, uint40 grantedAt, uint40 expiresAt, bool active, bytes32 purposeHash)",
+  "function getPatientRecords(bytes32 patientId, uint256 offset, uint256 limit) view returns (uint256[] memory, uint256)",
+  "function getRecord(uint256 recordId) view returns (bytes32, uint256, bytes32, bytes32, uint16, bool, address)",
+  "function accessGrants(uint256) view returns (bytes32, address, uint40, uint40, bool, bytes32)",
   "function totalGrants() view returns (uint256)",
 ]
+
 
 const DOCTORS = [
   { name: "Dr. Sarah Lee",    specialty: "Neurology",  address: "0x70997970C51812dc3A010C7d01b50e0d17dc79C8" },
