@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+sqlalchemy
+web3
+python-dotenv
+requests
+pydantic
+slowapi
+google-genai

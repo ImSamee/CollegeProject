@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+venv/
+.venv/
+env/
+*.log
+
+# Hardhat
+artifacts/
+cache/
+typechain/
+typechain-types/
+
+# Production build
+dist/
+build/
+
+# Environment Variables (CRITICAL)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Mac/System
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
