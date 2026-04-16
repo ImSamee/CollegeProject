@@ -21,11 +21,11 @@ const RELAYER_URL = import.meta.env.VITE_RELAYER_URL || "http://localhost:8000";
 const CONTRACT_ABI = [
   "function hasAccess(bytes32 patientId, address doctor) view returns (bool)",
   "function getPatientNonce(bytes32 patientId) view returns (uint256)",
-  "function patients(bytes32) view returns (bytes32, address, uint40, bool, uint32, bool, bytes32)",
+  "function patients(bytes32) view returns (bytes32 patientId, address controllerAddress, uint40 registeredAt, bool active, uint32 recordCount, bool consentGiven, bytes32 consentHash)",
   "function doctors(address) view returns (bool)",
-  "function getPatientRecords(bytes32 patientId, uint256 offset, uint256 limit) view returns (uint256[] memory, uint256)",
-  "function getRecord(uint256 recordId) view returns (bytes32, uint256, bytes32, bytes32, uint16, bool, address)",
-  "function accessGrants(uint256) view returns (bytes32, address, uint40, uint40, bool, bytes32)",
+  "function getPatientRecords(bytes32 patientId, uint256 offset, uint256 limit) view returns (uint256[] memory page, uint256 total)",
+  "function getRecord(uint256 recordId) view returns (bytes32 patientId, uint256 timestamp, bytes32 merkleRoot, bytes32 classification, uint16 confidenceBps, bool anomalyFlagged, address submittingDoctor)",
+  "function accessGrants(uint256) view returns (bytes32 patientId, address doctorAddress, uint40 grantedAt, uint40 expiresAt, bool active, bytes32 purposeHash)",
   "function totalGrants() view returns (uint256)",
 ]
 
