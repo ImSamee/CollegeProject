@@ -13,10 +13,10 @@ import {
 // 👇 IMPORT THE LOGIN PAGE
 import LoginPage from './LoginPage';
 
-// 🚨 PASTE YOUR NEW SEPOLIA CONTRACT ADDRESS HERE:
-const CONTRACT_ADDRESS = "0x1ecaF82622cBDb035f0CE78cB2E921303d631b35";
+// 🚨 ENVIRONMENT VARIABLES (Set these in frontend/.env)
+const CONTRACT_ADDRESS = import.meta.env.VITE_CONTRACT_ADDRESS || "0x1ecaF82622cBDb035f0CE78cB2E921303d631b35";
+const RELAYER_URL = import.meta.env.VITE_RELAYER_URL || "http://localhost:8000";
 
-const RELAYER_URL = "http://localhost:8000"
 const CONTRACT_ABI = [
   "function hasAccess(bytes32 patientId, address doctor) view returns (bool)",
   "function getPatientNonce(bytes32 patientId) view returns (uint256)",

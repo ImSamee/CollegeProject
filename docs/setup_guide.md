@@ -91,11 +91,14 @@ The frontend is a modern **React** application powered by **Vite** and **Tailwin
    ```bash
    npm install
    ```
-4. Start the development server:
+4. Configure environment variables:
+   - Copy `.env.example` to a new file named `.env`.
+   - Update `VITE_CONTRACT_ADDRESS` if you deployed a new contract.
+5. Start the development server:
    ```bash
    npm run dev
    ```
-5. Open your browser and navigate to the URL shown in the terminal (usually `http://localhost:5173`).
+6. Open your browser and navigate to the URL shown in the terminal (usually `http://localhost:5173`).
 
 ---
 
