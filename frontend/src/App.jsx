@@ -13,8 +13,8 @@ import {
 // 👇 IMPORT THE LOGIN PAGE
 import LoginPage from './LoginPage';
 
-// 🚨 EMERGENCY FIX: Hardcoded address for new PC
-const CONTRACT_ADDRESS = "0x7ba1605e51588cb1bb7d6cd66f55457e96611351";
+// Load the Sepolia contract from .env or fallback
+const CONTRACT_ADDRESS = import.meta.env.VITE_CONTRACT_ADDRESS || "0x1ecaF82622cBDb035f0CE78cB2E921303d631b35";
 const RELAYER_URL = import.meta.env.VITE_RELAYER_URL || "http://localhost:8000";
 
 
