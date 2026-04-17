@@ -100,7 +100,7 @@ app.add_middleware(
 
 # Initialize the contract globally for the backend
 def get_contract():
-    contract_address = os.environ.get("NEUROLEDGER_CONTRACT_ADDRESS", "").strip()
+    contract_address = os.environ.get("NEUROLEDGER_CONTRACT_ADDRESS", "").strip().strip('"').strip("'").strip("“").strip("”")
     if not contract_address:
         return None
     with open('../blockchain/artifacts/contracts/NeuroLedger_v3.sol/NeuroLedger.json', 'r') as f: 

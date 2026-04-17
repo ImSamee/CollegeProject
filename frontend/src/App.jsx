@@ -14,8 +14,8 @@ import {
 import LoginPage from './LoginPage';
 
 // Load the Sepolia contract from .env or fallback
-const CONTRACT_ADDRESS = import.meta.env.VITE_CONTRACT_ADDRESS || "0x1ecaF82622cBDb035f0CE78cB2E921303d631b35";
-const RELAYER_URL = import.meta.env.VITE_RELAYER_URL || "http://localhost:8000";
+const CONTRACT_ADDRESS = (import.meta.env.VITE_CONTRACT_ADDRESS || "0x1ecaF82622cBDb035f0CE78cB2E921303d631b35").replace(/["'“”]/g, "").trim();
+const RELAYER_URL = (import.meta.env.VITE_RELAYER_URL || "http://localhost:8000").replace(/["'“”]/g, "").trim();
 
 
 const CONTRACT_ABI = [

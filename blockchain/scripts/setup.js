@@ -4,8 +4,8 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 async function main() {
-  const contractAddress = process.env.NEUROLEDGER_CONTRACT_ADDRESS;
-  const patientWallet = process.env.PATIENT_WALLET_ADDRESS; 
+  const contractAddress = process.env.NEUROLEDGER_CONTRACT_ADDRESS?.replace(/["'“”]/g, "").trim();
+  const patientWallet = process.env.PATIENT_WALLET_ADDRESS?.replace(/["'“”]/g, "").trim(); 
 
   if (!contractAddress) throw new Error("Missing NEUROLEDGER_CONTRACT_ADDRESS in .env");
   if (!patientWallet) throw new Error("Missing PATIENT_WALLET_ADDRESS in .env");
