@@ -14,8 +14,8 @@ import {
 import LoginPage from './LoginPage';
 
 // 🚨 ENVIRONMENT VARIABLES (Set these in frontend/.env)
-const CONTRACT_ADDRESS = import.meta.env.VITE_CONTRACT_ADDRESS || ""; // ⚠️ Set VITE_CONTRACT_ADDRESS in frontend/.env
-const RELAYER_URL = import.meta.env.VITE_RELAYER_URL || "http://localhost:8002";
+const CONTRACT_ADDRESS = import.meta.env.VITE_CONTRACT_ADDRESS || "0x593Ae027fF7037Bb7a1B1B951F9E6f1Da25563FA"; // ⚠️ Set VITE_CONTRACT_ADDRESS in frontend/.env
+const RELAYER_URL = import.meta.env.VITE_RELAYER_URL || "http://localhost:8000";
 
 const CONTRACT_ABI = [
   "function hasAccess(bytes32 patientId, address doctor) view returns (bool)",
