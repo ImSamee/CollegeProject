@@ -98,14 +98,37 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# ABI is embedded here to avoid dependency on the gitignored artifacts/ folder.
+# This ensures the backend works on any fresh clone without `npx hardhat compile`.
+NEUROLEDGER_ABI = [
+  {"inputs": [], "stateMutability": "nonpayable", "type": "constructor"},
+  {"inputs": [{"internalType": "address", "name": "doctor", "type": "address"}], "name": "addDoctor", "outputs": [], "stateMutability": "nonpayable", "type": "function"},
+  {"inputs": [{"internalType": "uint256", "name": "", "type": "uint256"}], "name": "accessGrants", "outputs": [{"internalType": "bytes32", "name": "patientId", "type": "bytes32"}, {"internalType": "address", "name": "doctorAddress", "type": "address"}, {"internalType": "uint40", "name": "grantedAt", "type": "uint40"}, {"internalType": "uint40", "name": "expiresAt", "type": "uint40"}, {"internalType": "bool", "name": "active", "type": "bool"}, {"internalType": "bytes32", "name": "purposeHash", "type": "bytes32"}], "stateMutability": "view", "type": "function"},
+  {"inputs": [{"internalType": "address", "name": "", "type": "address"}], "name": "doctors", "outputs": [{"internalType": "bool", "name": "", "type": "bool"}], "stateMutability": "view", "type": "function"},
+  {"inputs": [{"internalType": "bytes32", "name": "patientId", "type": "bytes32"}, {"internalType": "address", "name": "doctor", "type": "address"}, {"internalType": "uint40", "name": "durationSecs", "type": "uint40"}, {"internalType": "bytes32", "name": "purposeHash", "type": "bytes32"}, {"internalType": "uint8", "name": "v", "type": "uint8"}, {"internalType": "bytes32", "name": "r", "type": "bytes32"}, {"internalType": "bytes32", "name": "s", "type": "bytes32"}], "name": "grantAccessMeta", "outputs": [{"internalType": "uint256", "name": "grantId", "type": "uint256"}], "stateMutability": "nonpayable", "type": "function"},
+  {"inputs": [{"internalType": "bytes32", "name": "patientId", "type": "bytes32"}, {"internalType": "address", "name": "doctor", "type": "address"}], "name": "hasAccess", "outputs": [{"internalType": "bool", "name": "", "type": "bool"}], "stateMutability": "view", "type": "function"},
+  {"inputs": [{"internalType": "bytes32", "name": "patientId", "type": "bytes32"}], "name": "getPatientNonce", "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}], "stateMutability": "view", "type": "function"},
+  {"inputs": [{"internalType": "bytes32", "name": "patientId", "type": "bytes32"}, {"internalType": "uint256", "name": "offset", "type": "uint256"}, {"internalType": "uint256", "name": "limit", "type": "uint256"}], "name": "getPatientRecords", "outputs": [{"internalType": "uint256[]", "name": "page", "type": "uint256[]"}, {"internalType": "uint256", "name": "total", "type": "uint256"}], "stateMutability": "view", "type": "function"},
+  {"inputs": [{"internalType": "uint256", "name": "recordId", "type": "uint256"}], "name": "getRecord", "outputs": [{"internalType": "bytes32", "name": "patientId", "type": "bytes32"}, {"internalType": "uint256", "name": "timestamp", "type": "uint256"}, {"internalType": "bytes32", "name": "merkleRoot", "type": "bytes32"}, {"internalType": "bytes32", "name": "classification", "type": "bytes32"}, {"internalType": "uint16", "name": "confidenceBps", "type": "uint16"}, {"internalType": "bool", "name": "anomalyFlagged", "type": "bool"}, {"internalType": "address", "name": "submittingDoctor", "type": "address"}], "stateMutability": "view", "type": "function"},
+  {"inputs": [{"internalType": "bytes32", "name": "", "type": "bytes32"}], "name": "patients", "outputs": [{"internalType": "bytes32", "name": "patientId", "type": "bytes32"}, {"internalType": "address", "name": "controllerAddress", "type": "address"}, {"internalType": "uint40", "name": "registeredAt", "type": "uint40"}, {"internalType": "bool", "name": "active", "type": "bool"}, {"internalType": "uint32", "name": "recordCount", "type": "uint32"}, {"internalType": "bool", "name": "consentGiven", "type": "bool"}, {"internalType": "bytes32", "name": "consentHash", "type": "bytes32"}], "stateMutability": "view", "type": "function"},
+  {"inputs": [{"internalType": "bytes32", "name": "", "type": "bytes32"}], "name": "patientNonces", "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}], "stateMutability": "view", "type": "function"},
+  {"inputs": [{"internalType": "bytes32", "name": "patientId", "type": "bytes32"}, {"internalType": "address", "name": "controller", "type": "address"}, {"internalType": "bytes32", "name": "consentHash", "type": "bytes32"}], "name": "registerPatient", "outputs": [], "stateMutability": "nonpayable", "type": "function"},
+  {"inputs": [{"internalType": "bytes32", "name": "patientId", "type": "bytes32"}, {"internalType": "address", "name": "doctor", "type": "address"}], "name": "revokeAccess", "outputs": [], "stateMutability": "nonpayable", "type": "function"},
+  {"inputs": [{"internalType": "bytes32", "name": "patientId", "type": "bytes32"}, {"internalType": "address", "name": "doctor", "type": "address"}, {"internalType": "uint8", "name": "v", "type": "uint8"}, {"internalType": "bytes32", "name": "r", "type": "bytes32"}, {"internalType": "bytes32", "name": "s", "type": "bytes32"}], "name": "revokeAccessMeta", "outputs": [], "stateMutability": "nonpayable", "type": "function"},
+  {"inputs": [], "name": "totalGrants", "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}], "stateMutability": "view", "type": "function"},
+  {"inputs": [], "name": "totalRecords", "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}], "stateMutability": "view", "type": "function"},
+  {"inputs": [], "name": "owner", "outputs": [{"internalType": "address", "name": "", "type": "address"}], "stateMutability": "view", "type": "function"},
+  {"inputs": [], "name": "paused", "outputs": [{"internalType": "bool", "name": "", "type": "bool"}], "stateMutability": "view", "type": "function"},
+  {"inputs": [], "name": "pause", "outputs": [], "stateMutability": "nonpayable", "type": "function"},
+  {"inputs": [], "name": "unpause", "outputs": [], "stateMutability": "nonpayable", "type": "function"},
+]
+
 # Initialize the contract globally for the backend
 def get_contract():
     contract_address = os.environ.get("NEUROLEDGER_CONTRACT_ADDRESS", "").strip().strip('"').strip("'").strip("“").strip("”")
     if not contract_address:
         return None
-    with open('../blockchain/artifacts/contracts/NeuroLedger_v3.sol/NeuroLedger.json', 'r') as f: 
-        contract_json = json.load(f)
-    return w3.eth.contract(address=contract_address, abi=contract_json['abi'])
+    return w3.eth.contract(address=contract_address, abi=NEUROLEDGER_ABI)
 
 @app.get("/meta/grant-digest")
 def get_grant_digest(patientId: str, doctor: str, durationSecs: int, purposeHash: str, nonce: int):

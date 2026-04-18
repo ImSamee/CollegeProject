@@ -17,8 +17,9 @@ async function main() {
   let currentNonce = await deployer.getNonce();
   console.log(`🔑 Bypassing RPC limits. Starting with Nonce: ${currentNonce}`);
   
-  const NeuroLedger = await hre.ethers.getContractFactory("NeuroLedger");
-  const contract = NeuroLedger.attach(contractAddress);
+  // Use getContractAt instead of ContractFactory.attach() to avoid
+  // "HardhatEthersProvider.resolveName is not implemented" error
+  const contract = await hre.ethers.getContractAt("NeuroLedger", contractAddress);
 
   const doctors = [
     "0x70997970C51812dc3A010C7d01b50e0d17dc79C8", // Dr. Sarah Lee
