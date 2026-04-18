@@ -19,7 +19,7 @@ w3 = Web3(Web3.HTTPProvider(RPC_URL))
 
 # Operator wallet that pays the gas fees
 OPERATOR_KEY  = os.environ.get("OPERATOR_PRIVATE_KEY")
-CONTRACT_ADDR = os.environ.get("NEUROLEDGER_CONTRACT_ADDRESS", "").strip().strip('"').strip("'").strip("“").strip("”")
+CONTRACT_ADDR = os.environ.get("NEUROLEDGER_CONTRACT_ADDRESS", "").strip().strip('"').strip("'").strip('\u201c').strip('\u201d')
 
 CHAIN_ID = 11155111 # SEPOLIA CHAIN ID
 

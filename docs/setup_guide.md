@@ -68,7 +68,8 @@ The backend is built with **Python** and **FastAPI**.
    ```
 6. Configure environment variables:
    - Copy `.env.example` to a new file named `.env`.
-   - Add your `GEMINI_API_KEY`, `SEPOLIA_RPC_URL`, etc.
+   - Add your `GEMINI_API_KEY`, `SEPOLIA_RPC_URL`, `OPERATOR_PRIVATE_KEY`, `NEUROLEDGER_CONTRACT_ADDRESS`, `PINATA_JWT`.
+   - Set `FRONTEND_ORIGIN` to the URL of your frontend (default: `http://localhost:5173`).
 7. Run the backend server:
    ```bash
    python main.py
