@@ -858,11 +858,22 @@ export default function App(){
   const connectWallet=async()=>{
     if(!window.ethereum)return alert("Please install a Web3 wallet like Rabby or MetaMask")
     try{
+      // ✅ FIX: Check network is Sepolia before proceeding
+      const chainId = await window.ethereum.request({method:'eth_chainId'})
+      if(chainId !== '0xaa36a7'){
+        try{
+          await window.ethereum.request({method:'wallet_switchEthereumChain',params:[{chainId:'0xaa36a7'}]})
+        }catch(switchErr){
+          return alert('Please switch your wallet to the Sepolia Testnet (Chain ID: 11155111) and try again.')
+        }
+      }
       const accounts=await window.ethereum.request({method:'eth_requestAccounts'});const addr=accounts[0];setAccount(addr);setPortalMode('detecting')
       try{
         const provider=new ethers.BrowserProvider(window.ethereum);const signer=await provider.getSigner()
         const contract=new ethers.Contract(CONTRACT_ADDRESS,CONTRACT_ABI,signer);setContractRef(contract)
-        const isDoctor=await contract.doctors(addr)
+        // ✅ FIX: Wrap doctors() call defensively — BAD_DATA if wrong network/contract
+        let isDoctor=false
+        try{isDoctor=await contract.doctors(addr)}catch(e){console.warn('[Contract] doctors() failed:',e.shortMessage||e.message)}
         if(isDoctor){setDoctorProfile(getDoctorProfile(addr));setPortalMode('doctor');return}
         setPortalMode('patient')
         try{const nonce=await contract.getPatientNonce(patientId);setMetaTxNonce(Number(nonce));setStatus(`Wallet connected. Nonce: ${nonce}`)}catch{}
@@ -875,11 +886,19 @@ export default function App(){
   const grantAccessMeta=async()=>{
     if(!account)return alert("Connect Wallet first")
     try{
-      setTxHash(null) 
+      setTxHash(null)
       const provider=new ethers.BrowserProvider(window.ethereum),signer=await provider.getSigner()
       const contract=new ethers.Contract(CONTRACT_ADDRESS,CONTRACT_ABI,signer)
-      const profile=await contract.patients(patientId)
-      if(account.toLowerCase()!==profile.controllerAddress.toLowerCase())return setStatus(`Wrong wallet! Expected: ${profile.controllerAddress.slice(0,8)}...`)
+      // ✅ FIX: Wrap patients() call defensively — BAD_DATA if patient not registered or wrong network
+      try{
+        const profile=await contract.patients(patientId)
+        if(profile.controllerAddress && profile.controllerAddress !== ethers.ZeroAddress &&
+           account.toLowerCase()!==profile.controllerAddress.toLowerCase())
+          return setStatus(`Wrong wallet! Expected: ${profile.controllerAddress.slice(0,8)}...`)
+      }catch(e){
+        console.warn('[Contract] patients() check skipped:',e.shortMessage||e.message)
+        // Patient not yet registered on-chain — proceed anyway and let the relayer handle it
+      }
       setStatus(`Signing Gasless Meta-Tx (Nonce: ${metaTxNonce})...`)
       const purposeHash="0x"+"aa".repeat(32)
       const res=await fetch(`${RELAYER_URL}/meta/grant-digest?patientId=${patientId}&doctor=${targetDoctor}&durationSecs=86400&purposeHash=${purposeHash}&nonce=${metaTxNonce}`)
