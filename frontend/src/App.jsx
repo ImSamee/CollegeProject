@@ -15,7 +15,7 @@ import LoginPage from './LoginPage';
 
 // 🚨 ENVIRONMENT VARIABLES (Set these in frontend/.env)
 const CONTRACT_ADDRESS = import.meta.env.VITE_CONTRACT_ADDRESS || ""; // ⚠️ Set VITE_CONTRACT_ADDRESS in frontend/.env
-const RELAYER_URL = import.meta.env.VITE_RELAYER_URL || "http://localhost:8000";
+const RELAYER_URL = import.meta.env.VITE_RELAYER_URL || "http://localhost:8002";
 
 const CONTRACT_ABI = [
   "function hasAccess(bytes32 patientId, address doctor) view returns (bool)",
