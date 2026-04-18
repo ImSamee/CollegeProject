@@ -13,16 +13,9 @@ import {
 // 👇 IMPORT THE LOGIN PAGE
 import LoginPage from './LoginPage';
 
-<<<<<<< HEAD
 // 🚨 ENVIRONMENT VARIABLES (Set these in frontend/.env)
-const CONTRACT_ADDRESS = import.meta.env.VITE_CONTRACT_ADDRESS || "0x593Ae027fF7037Bb7a1B1B951F9E6f1Da25563FA";
+const CONTRACT_ADDRESS = import.meta.env.VITE_CONTRACT_ADDRESS || "0x1ecaF82622cBDb035f0CE78cB2E921303d631b35";
 const RELAYER_URL = import.meta.env.VITE_RELAYER_URL || "http://localhost:8000";
-=======
-// Load the Sepolia contract from .env or fallback
-const CONTRACT_ADDRESS = (import.meta.env.VITE_CONTRACT_ADDRESS || "0x1ecaF82622cBDb035f0CE78cB2E921303d631b35").replace(/["'“”]/g, "").trim();
-const RELAYER_URL = (import.meta.env.VITE_RELAYER_URL || "http://localhost:8000").replace(/["'“”]/g, "").trim();
-
->>>>>>> 82dcf1a5b2a3893e4935add5ad7b2ebf81c2599d
 
 const CONTRACT_ABI = [
   "function hasAccess(bytes32 patientId, address doctor) view returns (bool)",
