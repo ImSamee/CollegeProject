@@ -69,7 +69,7 @@ The backend is built with **Python** and **FastAPI**.
 6. Configure environment variables:
    - Copy `.env.example` to a new file named `.env`.
    - Add your `GEMINI_API_KEY`, `SEPOLIA_RPC_URL`, `OPERATOR_PRIVATE_KEY`, `NEUROLEDGER_CONTRACT_ADDRESS`, `PINATA_JWT`.
-   - Set `FRONTEND_ORIGIN` to the URL of your frontend (default: `http://localhost:5174`).
+   - Set `FRONTEND_ORIGIN` to the URL of your frontend (default: `http://localhost:5173`).
 7. Run the backend server:
    ```bash
    python main.py
@@ -99,7 +99,7 @@ The frontend is a modern **React** application powered by **Vite** and **Tailwin
    ```bash
    npm run dev
    ```
-6. Open your browser and navigate to the URL shown in the terminal (usually `http://localhost:5174`).
+6. Open your browser and navigate to the URL shown in the terminal (usually `http://localhost:5173`).
 
 ---
 
@@ -107,7 +107,7 @@ The frontend is a modern **React** application powered by **Vite** and **Tailwin
 
 - **Node Version**: If you encounter errors during `npm install`, ensure you are using a compatible Node.js version.
 - **Python Imports**: If a package is missing, double-check that you activated the virtual environment before running `pip install`.
-- **Port Conflicts**: If port 8002 (Backend) or 5174 (Frontend) is already in use, you may need to close the existing process or change the port in the configuration.
+- **Port Conflicts**: If port 8000 (Backend) or 5174 (Frontend) is already in use, you may need to close the existing process or change the port in the configuration.
 - **Wallet Connection**: Ensure your Metamask (or equivalent) is set to the correct network (e.g., Sepolia) to interact with the blockchain features.
 
 ---
