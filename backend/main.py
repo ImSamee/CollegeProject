@@ -174,10 +174,10 @@ def send_message(request: Request, msg: ChatMessage, db: Session = Depends(get_d
         
         system_prompt = f"You are {msg.doctor_name}, a {specialty}. You are talking to your patient Alex.\nAlex's current vitals: Heart Rate {vitals.heartRate} BPM, Sleep Quality {vitals.sleepQuality}%, Cognitive Load {vitals.cognitiveLoad}%.\nKeep your response under 3 sentences, be professional, warm, and medical.\n\nConversation so far:\n{history_text}\n\nAlex just said: '{msg.text}'"
         try:
-                bot_text = client.models.generate_content(model='gemini-2.0-flash', contents=system_prompt).text
-            except Exception as ai_err:
-                print(f"[AI Error] {ai_err}")
-                bot_text = "I am currently reviewing patient files. I will look at your message shortly."
+            bot_text = client.models.generate_content(model='gemini-2.0-flash', contents=system_prompt).text
+        except Exception as ai_err:
+            print(f"[AI Error] {ai_err}")
+            bot_text = "I am currently reviewing patient files. I will look at your message shortly."
         
         db.add(DBMessage(text=bot_text, time=str(int(time.time())), isDoc=True, doctor_address=msg.doctor_address))
         db.commit()
