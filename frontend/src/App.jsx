@@ -13,9 +13,16 @@ import {
 // 👇 IMPORT THE LOGIN PAGE
 import LoginPage from './LoginPage';
 
+<<<<<<< HEAD
 // 🚨 ENVIRONMENT VARIABLES (Set these in frontend/.env)
 const CONTRACT_ADDRESS = import.meta.env.VITE_CONTRACT_ADDRESS || "0x593Ae027fF7037Bb7a1B1B951F9E6f1Da25563FA";
 const RELAYER_URL = import.meta.env.VITE_RELAYER_URL || "http://localhost:8000";
+=======
+// Load the Sepolia contract from .env or fallback
+const CONTRACT_ADDRESS = (import.meta.env.VITE_CONTRACT_ADDRESS || "0x1ecaF82622cBDb035f0CE78cB2E921303d631b35").replace(/["'“”]/g, "").trim();
+const RELAYER_URL = (import.meta.env.VITE_RELAYER_URL || "http://localhost:8000").replace(/["'“”]/g, "").trim();
+
+>>>>>>> 82dcf1a5b2a3893e4935add5ad7b2ebf81c2599d
 
 const CONTRACT_ABI = [
   "function hasAccess(bytes32 patientId, address doctor) view returns (bool)",
@@ -27,6 +34,7 @@ const CONTRACT_ABI = [
   "function accessGrants(uint256) view returns (bytes32 patientId, address doctorAddress, uint40 grantedAt, uint40 expiresAt, bool active, bytes32 purposeHash)",
   "function totalGrants() view returns (uint256)",
 ]
+
 
 const DOCTORS = [
   { name: "Dr. Sarah Lee",    specialty: "Neurology",  address: "0x70997970C51812dc3A010C7d01b50e0d17dc79C8" },
@@ -978,7 +986,7 @@ export default function App(){
   return(
     <ThemeContext.Provider value={{isLight:isLightMode,setIsLight:setIsLightMode}}>
       <Router>
-        <div className={`flex h-screen text-white font-sans overflow-hidden transition-colors duration-300 ${isLightMode?'bg-slate-50':'bg-nl-dark'}`}>
+        <div className={`flex h-screen font-sans overflow-hidden transition-colors duration-300 ${isLightMode ? 'bg-slate-50 text-slate-900' : 'bg-nl-dark text-white'}`}>
           <Sidebar account={account} disconnectWallet={disconnectWallet}/>
           <div className="flex-1 flex flex-col overflow-y-auto relative scroll-smooth">
             <Header account={account} connectWallet={connectWallet} disconnectWallet={disconnectWallet}/>

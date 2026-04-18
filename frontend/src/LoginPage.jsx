@@ -128,7 +128,7 @@ export default function LoginPage({ connectWallet, onEmailLogin }) {
                   onChange={e => setEmail(e.target.value)} 
                   autoComplete="username"
                   placeholder="you@example.com" 
-                  className="w-full bg-slate-100 dark:bg-gray-900 border border-slate-200 dark:border-gray-800 rounded-xl py-3.5 px-4 text-sm focus:outline-none focus:border-nl-accent focus:ring-1 focus:ring-nl-accent transition-all placeholder-slate-400 dark:placeholder-gray-600" 
+                  className="w-full bg-white dark:bg-gray-900 border border-slate-200 dark:border-gray-800 rounded-xl py-3.5 px-4 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-nl-accent focus:ring-1 focus:ring-nl-accent transition-all placeholder-slate-400 dark:placeholder-gray-600 shadow-sm" 
                 />
               </div>
               <div>
@@ -141,7 +141,7 @@ export default function LoginPage({ connectWallet, onEmailLogin }) {
                     onChange={e => setPassword(e.target.value)} 
                     autoComplete="current-password"
                     placeholder="••••••••••••" 
-                    className="w-full bg-slate-100 dark:bg-gray-900 border border-slate-200 dark:border-gray-800 rounded-xl py-3.5 px-4 pr-10 text-sm focus:outline-none focus:border-nl-accent focus:ring-1 focus:ring-nl-accent transition-all placeholder-slate-400 dark:placeholder-gray-600" 
+                    className="w-full bg-white dark:bg-gray-900 border border-slate-200 dark:border-gray-800 rounded-xl py-3.5 px-4 pr-10 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-nl-accent focus:ring-1 focus:ring-nl-accent transition-all placeholder-slate-400 dark:placeholder-gray-600 shadow-sm" 
                   />
                   <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-nl-accent transition-colors">
                     <CheckCircle2 className="w-5 h-5" />
@@ -149,7 +149,7 @@ export default function LoginPage({ connectWallet, onEmailLogin }) {
                 </div>
               </div>
 
-              <button type="submit" disabled={isSubmitting} className="w-full bg-slate-900 dark:bg-gray-900 border border-slate-200 dark:border-gray-800 text-white font-bold py-3.5 rounded-xl hover:border-nl-accent/50 transition-all duration-300 flex items-center justify-center gap-2">
+              <button type="submit" disabled={isSubmitting} className={`w-full font-bold py-3.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 border ${isLight ? 'bg-slate-800 hover:bg-slate-900 text-white border-slate-800' : 'bg-gray-900 hover:bg-black text-white border-gray-800'} hover:border-nl-accent/50 shadow-lg`}>
                 {isSubmitting ? <div className="animate-spin h-5 w-5 border-2 border-nl-accent border-t-transparent rounded-full" /> : <span>Sign In</span>}
               </button>
             </form>
